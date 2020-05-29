@@ -219,10 +219,27 @@ VALUES
 (5,'Lay''s Paprica','LAY PAP','2001-01-01','9999-12-31',0.49,1,NULL,6,6,7),
 (6,'Lay''s Onion','LAY ON','2010-01-01','9999-12-31',2.49,1,NULL,7,2,6),
 (7,'Lay''s Salt','LAY SLT','1970-01-01','1990-12-31',4.99,1,NULL,3,5,4),
-(8,'Lay''s Super Salty','LAY SPR SLT','1991-01-01','9999-12-31',6.99,1,7,3,5,4),
 (9,'L&M Red Toasted','LM RT','1950-01-01','1974-12-31',16.99,2,NULL,1,5,2),
-(10,'L&M Red Browned','LM RB','1975-01-01','9999-12-31',21.99,2,10,1,5,2),
 (11,'L&M Blue','LM B','1980-01-01','9999-12-31',17.99,2,NULL,5,5,5);
+
+INSERT INTO sale.product
+(
+    id,
+    product_name,         
+    product_business_code,
+    begin_date,           
+    end_date,             
+    price,                
+    quantity,             
+    legacy_id,            
+    market_id,            
+    unit_id,              
+    currency_id          
+)
+VALUES
+(8,'Lay''s Super Salty','LAY SPR SLT','1991-01-01','9999-12-31',6.99,1,7,3,5,4),
+(10,'L&M Red Browned','LM RB','1975-01-01','9999-12-31',21.99,2,9,1,5,2);
+
 
 /*
 1. Find, which product has better sale factor (in term for number of sales product) - new or old (legacy product)?
