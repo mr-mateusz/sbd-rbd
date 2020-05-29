@@ -21,7 +21,7 @@ services:
       - 8080:8080
     volumes:
       - data-volume1:/cockroach/cockroach-data
-    command: start --insecure --join=roach1,roach2,roach3
+    command: start --insecure --join=roach1,roach2,roach3 --locality=region=us-east
 
   roach2:
     hostname: roach2
@@ -33,7 +33,7 @@ services:
       - data-volume2:/cockroach/cockroach-data
     depends_on:
       - roach1
-    command: start --insecure --join=roach1,roach2,roach3
+    command: start --insecure --join=roach1,roach2,roach3 --locality=region=us-midwest
 
   roach3:
     hostname: roach3
@@ -45,4 +45,4 @@ services:
       - data-volume3:/cockroach/cockroach-data
     depends_on:
       - roach1
-    command: start --insecure --join=roach1,roach2,roach3
+    command: start --insecure --join=roach1,roach2,roach3 --locality=region=us-west
