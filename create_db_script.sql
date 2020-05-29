@@ -1,11 +1,7 @@
 
 -- sales
 
-CREATE DATABASE rdb;
-
-\connect rdb;
-
-CREATE SCHEMA sale;
+CREATE DATABASE sale;
 
 CREATE TABLE sale.store_type (
     id              SERIAL          PRIMARY KEY,
@@ -220,4 +216,6 @@ VALUES
 ("L&M Blue","LM B","1980-01-01","9999-12-31",17.99,2,NULL,5,5,5);
 
 
---DROP DATABASE rdb;
+--DROP DATABASE sale;
+
+
