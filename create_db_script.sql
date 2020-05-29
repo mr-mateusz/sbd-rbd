@@ -245,22 +245,26 @@ VALUES
 1. Find, which product has better sale factor (in term for number of sales product) - new or old (legacy product)?
 
 ;
-WITH legacy AS 
+WITH legacy AS
 (
-    SELECT 
-        current.product_name AS product_name,
+    SELECT
+        legacy.id,
+        legacy.product_name AS product_name,
         COUNT(*) AS sale_products
     FROM sale.product current
         INNER JOIN sale.product legacy ON current.legacy_id = legacy.id
-        INNER JOIN sale.transaction tran ON current.id = tran.product_id
-    GROUBY BY current.id, current.product_name
+        INNER JOIN sale.transaction tran ON legacy.id = tran.product_id
+    GROUP BY legacy.id, legacy.product_name
 ),
-current AS 
+current AS
 (
     SELECT
+        id,
         product_name,
-        COUNT(*) AS sale_products
-    FROM sale.product
+        COUNT(*) AS sale_products,
+        legacy_id
+    FROM sale.product current
+        INNER JOIN sale.transaction tran ON current.id = tran.product_id
     WHERE end_date = '9999-12-31'
     GROUP BY id
 )
@@ -269,33 +273,49 @@ SELECT
     legacy.sale_products AS legacy_sale,
     current.product_name AS current_product,
     current.sale_products AS current_sale,
-    CASE 
+    CASE
         WHEN legacy.sale_products > current.sale_products THEN 'Legacy product sale is better!'
         WHEN legacy.sale_products < current.sale_products THEN 'Current product sale is better!'
-    ELSE 
+    ELSE
         'Sale is equal!'
     END AS sale_compare
-FROM legacy 
+FROM legacy
 INNER JOIN current ON legacy.id = current.legacy_id;
 
 2. Check, which store was the most profitable for company
 
-SELECT 
+SELECT
     store.store_name,
     COUNT(*) AS transactions,
     SUM(prod.price) AS total_sum,
-    SUM(prod.price) / COUNT(*) AS average_product_price
+    ROUND(SUM(prod.price) / COUNT(*),2) AS average_product_price
 FROM sale.transaction tran
     INNER JOIN sale.point_of_sale AS pos ON tran.pos_id = pos.id
     INNER JOIN sale.store AS store ON pos.store_id = store.id
     INNER JOIN sale.product AS prod ON tran.product_id = prod.id
-GROUP BY store.id, store.store_name, prod.product_id, prod.product_name
+GROUP BY store.id,
+         store.store_name
+ORDER BY transactions DESC,
+         total_sum DESC;
 
 3. Normalize product price to USD
 
-SELECT 
-FROM product prod 
-INNER JOIN 
+SELECT
+    prod.product_name,
+    prod.product_business_code,
+    CASE curr.currency_code
+      WHEN 'PLN' THEN ROUND(prod.price * 0.25,2)
+      WHEN 'USD' THEN prod.price
+      WHEN 'AUD' THEN ROUND(prod.price * 0.65,2)
+      WHEN 'EUR' THEN ROUND(prod.price * 1.24,2)
+      WHEN 'CHF' THEN ROUND(prod.price * 1.05,2)
+      WHEN 'JPY' THEN ROUND(prod.price * 0.14,2)
+      WHEN 'GBP' THEN ROUND(prod.price * 1.12,2)
+      ELSE 0.0
+    END price_in_USD,
+    CONCAT(prod.price,' ',curr.currency_code) AS original_price
+FROM sale.product prod
+INNER JOIN sale.currency curr ON prod.currency_id = curr.id;
 
 
 */
