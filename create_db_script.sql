@@ -107,32 +107,35 @@ ALTER TABLE sale.transaction ADD CONSTRAINT fk_product_transaction_product_id FO
 
 INSERT INTO sale.store_type 
 (
+    id,
     store_type_name,
     description
 )
 VALUES
-('Supermarket','Store area > 500 square meters.'),
-('Market hall','Store area > 1500 square meters. Distributed suppliers'),
-('Gass station','To be defined'),
-('Glossary','Local or sublocal glossary shop'),
-('Shopping Gallery','Store area <= 500');
+(1,'Supermarket','Store area > 500 square meters.'),
+(2,'Market hall','Store area > 1500 square meters. Distributed suppliers'),
+(3,'Gass station','To be defined'),
+(4,'Glossary','Local or sublocal glossary shop'),
+(5,'Shopping Gallery','Store area <= 500');
 
 INSERT INTO sale.market
 (
-    market_name 
+    id,
+    market_name,
     market_mnemo
 )
 VALUES
-('Western Europe','WST_EU'),
-('Eastern Europe','EST_EU'),
-('North America','NTH_AMER'),
-('South America','STH_AMER'),
-('Central Asia','CNTL_ASIA'),
-('Pacific and Oceanic','PAC_N_OCEAN'),
-('India Subcontinent','IND_SUB');
+(1,'Western Europe','WST_EU'),
+(2,'Eastern Europe','EST_EU'),
+(3,'North America','NTH_AMER'),
+(4,'South America','STH_AMER'),
+(5,'Central Asia','CNTL_ASIA'),
+(6,'Pacific and Oceanic','PAC_N_OCEAN'),
+(7,'India Subcontinent','IND_SUB');
 
 INSERT INTO sale.store
 (
+    id,
     store_name,   
     street_name,  
     street_number,
@@ -142,57 +145,61 @@ INSERT INTO sale.store
     store_type_id
 )
 VALUES
-('Tesco','Hemingway st.','12','5K','01-954',1,1),
-('Auchan','E. M. Remarque st.','170A','1','55-439',1,2),
-('Shell Station','Puszkin st.','3','14','44-901',2,3),
-('Kauffmann','Gagarin st.','11','18S','89-674',2,4),
-('Netto','Neil Armstrong av.','1','5','01-005',3,5),
-('Pepco','Simone Boulivare st.','13','332','05-092',4,1),
-('Carefour','Chang Kai Shek st.','7','1233','09-466',5,2),
-('Lidl','Darwin av.','1','94','02-112',6,4),
-('Super Mercado','Brama Puta st.','40','1301','06-750',7,5);
+(1,'Tesco','Hemingway st.','12','5K','01-954',1,1),
+(2,'Auchan','E. M. Remarque st.','170A','1','55-439',1,2),
+(3,'Shell Station','Puszkin st.','3','14','44-901',2,3),
+(4,'Kauffmann','Gagarin st.','11','18S','89-674',2,4),
+(5,'Netto','Neil Armstrong av.','1','5','01-005',3,5),
+(6,'Pepco','Simone Boulivare st.','13','332','05-092',4,1),
+(7,'Carefour','Chang Kai Shek st.','7','1233','09-466',5,2),
+(8,'Lidl','Darwin av.','1','94','02-112',6,4),
+(9,'Super Mercado','Brama Puta st.','40','1301','06-750',7,5);
 
 INSERT INTO sale.unit
 (
+    id,
     unit_type,
     description
 )
 VALUES
-('L','Litr'),
-('g','Gram'),
-('mL','Mililitr'),
-('gal','Gallon'),
-('lb','Pound'),
-('kg','Kilogram');
+(1,'L','Litr'),
+(2,'g','Gram'),
+(3,'mL','Mililitr'),
+(4,'gal','Gallon'),
+(5,'lb','Pound'),
+(6,'kg','Kilogram');
 
 INSERT INTO sale.currency
 (
+    id,
     currency_name,
     currency_code
 )
 VALUES
-('Złoty','PLN'),
-('United States Dollar','USD'),
-('Australian Dollar ','AUD'),
-('British Pound','GBP'),
-('Euro','EUR'),
-('Japanese Yen','JPY'),
-('Swiss Frank','CHF');
+(1,'Złoty','PLN'),
+(2,'United States Dollar','USD'),
+(3,'Australian Dollar ','AUD'),
+(4,'British Pound','GBP'),
+(5,'Euro','EUR'),
+(6,'Japanese Yen','JPY'),
+(7,'Swiss Frank','CHF');
 
 INSERT INTO sale.transaction_type
 (
+    id,
     transaction_type,
     description
 )
 VALUES
-('Cash','Paid by cash in local currency'),
-('BLIK','Paid by phone'),
-('Credit Card','Paid by bank transfer'),
-('Invoice','Invoice for company'),
-('Debit Card','Debt was made');
+(1,'Cash','Paid by cash in local currency'),
+(2,'BLIK','Paid by phone'),
+(3,'Credit Card','Paid by bank transfer'),
+(4,'Invoice','Invoice for company'),
+(5,'Debit Card','Debt was made');
 
 INSERT INTO sale.product
 (
+    id,
     product_name,         
     product_business_code,
     begin_date,           
@@ -205,17 +212,17 @@ INSERT INTO sale.product
     currency_id          
 )
 VALUES
-('Coca Cola Light Can','CCL 001','1999-01-01','9999-12-31',1.99,1,NULL,1,3,1),
-('Coca Cola Zero Can','CCZ 001','2005-06-01','9999-12-31',2.99,1,NULL,2,4,2),
-('Fanta Orange 4pack','FO4P','2000-02-01','9999-12-31',12.99,4,NULL,3,5,3),
-('Sprite Can','S 020','2001-01-01','9999-12-31',0.99,1,NULL,4,1,5),
-('Lay''s Paprica','LAY PAP','2001-01-01','9999-12-31',0.49,1,NULL,6,6,7),
-('Lay''s Onion','LAY ON','2010-01-01','9999-12-31',2.49,1,NULL,7,2,6),
-('Lay''s Salt','LAY SLT','1970-01-01','1990-12-31',4.99,1,NULL,3,5,4),
-('Lay''s Super Salty','LAY SPR SLT','1991-01-01','9999-12-31',6.99,1,7,3,5,4),
-('L&M Red Toasted','LM RT','1950-01-01','1974-12-31',16.99,2,NULL,1,5,2),
-('L&M Red Browned','LM RB','1975-01-01','9999-12-31',21.99,2,10,1,5,2),
-('L&M Blue','LM B','1980-01-01','9999-12-31',17.99,2,NULL,5,5,5);
+(1,'Coca Cola Light Can','CCL 001','1999-01-01','9999-12-31',1.99,1,NULL,1,3,1),
+(2,'Coca Cola Zero Can','CCZ 001','2005-06-01','9999-12-31',2.99,1,NULL,2,4,2),
+(3,'Fanta Orange 4pack','FO4P','2000-02-01','9999-12-31',12.99,4,NULL,3,5,3),
+(4,'Sprite Can','S 020','2001-01-01','9999-12-31',0.99,1,NULL,4,1,5),
+(5,'Lay''s Paprica','LAY PAP','2001-01-01','9999-12-31',0.49,1,NULL,6,6,7),
+(6,'Lay''s Onion','LAY ON','2010-01-01','9999-12-31',2.49,1,NULL,7,2,6),
+(7,'Lay''s Salt','LAY SLT','1970-01-01','1990-12-31',4.99,1,NULL,3,5,4),
+(8,'Lay''s Super Salty','LAY SPR SLT','1991-01-01','9999-12-31',6.99,1,7,3,5,4),
+(9,'L&M Red Toasted','LM RT','1950-01-01','1974-12-31',16.99,2,NULL,1,5,2),
+(10,'L&M Red Browned','LM RB','1975-01-01','9999-12-31',21.99,2,10,1,5,2),
+(11,'L&M Blue','LM B','1980-01-01','9999-12-31',17.99,2,NULL,5,5,5);
 
 /*
 1. Find, which product has better sale factor (in term for number of sales product) - new or old (legacy product)?
@@ -252,7 +259,7 @@ SELECT
         'Sale is equal!'
     END AS sale_compare
 FROM legacy 
-INNER JOIN current ON legacy.id = current.legacy_id 
+INNER JOIN current ON legacy.id = current.legacy_id;
 
 2. Check, which store was the most profitable for company
 
@@ -266,6 +273,14 @@ FROM sale.transaction tran
     INNER JOIN sale.store AS store ON pos.store_id = store.id
     INNER JOIN sale.product AS prod ON tran.product_id = prod.id
 GROUP BY store.id, store.store_name, prod.product_id, prod.product_name
+
+3. Normalize product price to USD
+
+SELECT 
+FROM product prod 
+INNER JOIN 
+
+
 */
 
 
