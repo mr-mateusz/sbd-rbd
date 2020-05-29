@@ -58,7 +58,7 @@ CREATE TABLE sale.product (
     product_business_code   VARCHAR(200),
     begin_date              DATE            NOT NULL,
     end_date                DATE,
-    price                   INT             NOT NULL,
+    price                   DECIMAL         NOT NULL,
     quantity                INT             NOT NULL,
     legacy_id               INT,
     market_id               INT             NOT NULL,
