@@ -105,8 +105,8 @@ ALTER TABLE sale.transaction ADD CONSTRAINT fk_product_transaction_product_id FO
 
 INSERT INTO sale.store_type 
 (
-    store_type,
-    descrition
+    store_type_name,
+    description
 )
 VALUES
 ("Supermarket","Store area > 500 square meters."),
@@ -214,6 +214,8 @@ VALUES
 ("L&M Red Toasted","LM RT","1950-01-01","1974-12-31",16.99,2,NULL,1,5,2),
 ("L&M Red Browned","LM RB","1975-01-01","9999-12-31",21.99,2,10,1,5,2),
 ("L&M Blue","LM B","1980-01-01","9999-12-31",17.99,2,NULL,5,5,5);
+
+
 
 
 --DROP DATABASE sale;
