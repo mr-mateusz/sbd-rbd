@@ -105,4 +105,119 @@ ALTER TABLE sale.transaction ADD CONSTRAINT fk_transaction_type_transaction_tran
 ALTER TABLE sale.transaction ADD CONSTRAINT fk_product_transaction_product_id FOREIGN KEY (product_id)
     REFERENCES sale.product (id) ON DELETE RESTRICT;
 
+
+
+INSERT INTO sale.store_type 
+(
+    store_type,
+    descrition
+)
+VALUES
+("Supermarket","Store area > 500 square meters."),
+("Market hall","Store area > 1500 square meters. Distributed suppliers"),
+("Gass station","To be defined"),
+("Glossary","Local or sublocal glossary shop"),
+("Shopping Gallery","Store area <= 500");
+
+INSERT INTO sale.market
+(
+    market_name 
+    market_mnemo
+)
+VALUES
+("Western Europe","WST_EU"),
+("Eastern Europe","EST_EU"),
+("North America","NTH_AMER"),
+("South America","STH_AMER"),
+("Central Asia","CNTL_ASIA"),
+("Pacific and Oceanic","PAC_N_OCEAN"),
+("India Subcontinent","IND_SUB");
+
+INSERT INTO sale.store
+(
+    store_name,   
+    street_name,  
+    street_number,
+    local_number, 
+    postal_code,  
+    market_id,    
+    store_type_id
+)
+VALUES
+("Tesco","Hemingway st.","12","5K","01-954",1,1),
+("Auchan","E. M. Remarque st.","170A","1","55-439",1,2),
+("Shell Station","Puszkin st.","3","14","44-901",2,3),
+("Kauffmann","Gagarin st.","11","18S","89-674",2,4),
+("Netto","Neil Armstrong av.","1","5","01-005",3,5),
+("Pepco","Simone Boulivare st.","13","332","05-092",4,1),
+("Carefour","Chang Kai Shek st.","7","1233","09-466",5,2),
+("Lidl","Darwin av.","1","94","02-112",6,4),
+("Super Mercado","Brama Puta st.","40","1301","06-750",7,5);
+
+INSERT INTO sale.unit
+(
+    unit_type,
+    description
+)
+VALUES
+("L","Litr"),
+("g","Gram"),
+("mL","Mililitr"),
+("gal","Gallon"),
+("lb","Pound"),
+("kg","Kilogram");
+
+INSERT INTO sale.currency
+(
+    currency_name,
+    currency_code
+)
+VALUES
+("Złoty","PLN"),
+("United States Dollar","USD"),
+("Australian Dollar ","AUD"),
+("British Pound","GBP"),
+("Euro","EUR"),
+("Japanese Yen","JPY"),
+("Swiss Frank","CHF");
+
+INSERT INTO sale.transaction_type
+(
+    transaction_type,
+    description
+)
+VALUES
+("Cash","Paid by cash in local currency"),
+("BLIK","Paid by phone"),
+("Credit Card","Paid by bank transfer"),
+("Invoice","Invoice for company"),
+("Debit Card","Debt was made");
+
+INSERT INTO sale.product
+(
+    product_name,         
+    product_business_code,
+    begin_date,           
+    end_date,             
+    price,                
+    quantity,             
+    legacy_id,            
+    market_id,            
+    unit_id,              
+    currency_id          
+)
+VALUES
+("Coca Cola Light Can","CCL 001","1999-01-01","9999-12-31",1.99,1,NULL,1,3,1),
+("Coca Cola Zero Can","CCZ 001","2005-06-01","9999-12-31",2.99,1,NULL,2,4,2),
+("Fanta Orange 4pack","FO4P","2000-02-01","9999-12-31",12.99,4,NULL,3,5,3),
+("Sprite Can","S 020","2001-01-01","9999-12-31",0.99,1,NULL,4,1,5),
+("Lay's Paprica","LAY PAP","2001-01-01","9999-12-31",0.49,1,NULL,6,6,7),
+("Lay's Onion","LAY ON","2010-01-01","9999-12-31",2.49,1,NULL,7,2,6),
+("Lay's Salt","LAY SLT","1970-01-01","1990-12-31",4.99,1,NULL,3,5,4),
+("Lay's Super Salty","LAY SPR SLT","1991-01-01","9999-12-31",6.99,1,7,3,5,4),
+("L&M Red Toasted","LM RT","1950-01-01","1974-12-31",16.99,2,NULL,1,5,2),
+("L&M Red Browned","LM RB","1975-01-01","9999-12-31",21.99,2,10,1,5,2),
+("L&M Blue","LM B","1980-01-01","9999-12-31",17.99,2,NULL,5,5,5);
+
+
 --DROP DATABASE rdb;
