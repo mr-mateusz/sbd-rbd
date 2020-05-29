@@ -313,7 +313,7 @@ SELECT
       WHEN 'GBP' THEN ROUND(prod.price * 1.12,2)
       ELSE 0.0
     END price_in_USD,
-    CONCAT(prod.price,' ',curr.currency_code) AS original_price
+    CONCAT(CAST(prod.price AS VARCHAR),' ',curr.currency_code) AS original_price
 FROM sale.product prod
 INNER JOIN sale.currency curr ON prod.currency_id = curr.id;
 
