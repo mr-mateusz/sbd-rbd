@@ -29,7 +29,7 @@ for i in range(0, n_pos):
     if(i == n_pos-1):
         end_line = ";"
 
-    print('({},"_{}-[{}={}]_{}",{}){}'.format(i+1, prefix_code, midfix_code,
+    print("({},'_{}-[{}={}]_{}',{}){}".format(i+1, prefix_code, midfix_code,
                                               endfix_code, suffix_code, store_code,
                                               end_line))
 
@@ -55,10 +55,10 @@ for i in range(0, n_transaction):
     except Exception as e:
         i_date = date(2020, 2, 28)
 
-    if(i == n_pos-1):
+    if(i == n_transaction-1):
         end_line = ";"
 
-    print('({},{},{},"{}"){}'.format(i_pos,
+    print("({},{},{},'{}'){}".format(i_pos,
                                      i_tran,
                                      i_prod,
                                      i_date,
