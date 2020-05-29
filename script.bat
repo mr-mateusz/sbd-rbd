@@ -1,22 +1,28 @@
+:: 1. Generate data to insert
+python generate_insert.py > insert_data.sql
+
+:: 2. Docker network
 docker network create -d bridge roachnet
 
+:: 3. Run containers
 docker-compose up -d
 
+:: 4. Cluster init
 docker exec -it roach1 ./cockroach init --insecure
 
-docker exec -it roach1 ./cockroach sql --insecure
+:: 5. Copy data to conatiner
+docker cp create_db_scripts.sql roach1:/cockroach/create_db_scripts.sql
+docker cp insert_data.sql roach1:/cockroach/insert_data.sql
 
-CREATE DATABASE bank;
-CREATE TABLE bank.accounts (id INT PRIMARY KEY, balance DECIMAL);
-INSERT INTO bank.accounts VALUES (1, 1000.50);
-SELECT * FROM bank.accounts;
+:: 6. Run scripts inside docker container
+docker exec -it roach1 bash
+./cockroach sql --insecure < create_db_scripts.sql
+./cockroach sql --insecure < insert_data.sql
 
-docker exec -it roach2 ./cockroach sql --insecure
-
-SELECT * FROM bank.accounts;
-
-docker exec -it roach1 ./cockroach workload init movr
-docker exec -it roach1 ./cockroach workload run movr --duration=5m
+\q
 
 
-::http://192.168.99.100:8080/#/overview/list
+
+:: Stop and remove containers
+docker-compose down
+docker volume prune -f
