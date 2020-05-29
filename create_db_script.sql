@@ -158,7 +158,7 @@ VALUES
 INSERT INTO sale.unit
 (
     id,
-    unit_type,
+    unit_name,
     description
 )
 VALUES
