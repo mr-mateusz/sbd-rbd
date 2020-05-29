@@ -11,15 +11,15 @@ docker-compose up -d
 docker exec -it roach1 ./cockroach init --insecure
 
 :: 5. Copy data to conatiner
-docker cp create_db_scripts.sql roach1:/cockroach/create_db_scripts.sql
+docker cp create_db_script.sql roach1:/cockroach/create_db_script.sql
 docker cp insert_data.sql roach1:/cockroach/insert_data.sql
 
 :: 6. Run scripts inside docker container
 docker exec -it roach1 bash
-./cockroach sql --insecure < create_db_scripts.sql
+./cockroach sql --insecure < create_db_script.sql
 ./cockroach sql --insecure < insert_data.sql
 
-\q
+
 
 
 
