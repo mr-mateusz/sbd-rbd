@@ -19,3 +19,8 @@ docker exec -it roach1 ./cockroach workload run movr --duration=5m
 
 CREATE USER IF NOT EXISTS maxroach;
 GRANT ALL ON DATABASE sale TO maxroach;
+
+
+
+
+docker run -e POSTGRES_PASSWORD=password -d --name pstgrs -p 54320:5432 postgres
