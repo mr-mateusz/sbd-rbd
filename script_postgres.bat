@@ -1,3 +1,6 @@
+:: 0. Generate data to insert
+python generate_insert.py > insert_data.sql
+
 :: 1. Run postgres container
 docker run -e POSTGRES_PASSWORD=password -d --name pstgrs -p 54320:5432 postgres
 
